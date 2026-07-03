@@ -47,6 +47,17 @@
     transform: none;
   }
 
+  /* Restrained CRT scanline over the terminal output */
+  .terminal-scan {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(255, 255, 255, 0.012) 3px,
+      transparent 4px
+    );
+  }
+
   /* Styled <details> for Decisions & Tradeoffs */
   .decisions summary {
     @apply cursor-pointer select-none list-none font-mono text-sm text-amber transition-colors;
