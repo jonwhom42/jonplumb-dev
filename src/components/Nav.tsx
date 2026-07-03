@@ -23,7 +23,7 @@ export default function Nav({ active }: NavProps) {
         <a
           href="#top"
           className="font-mono text-lg font-medium text-text"
-          aria-label="Back to top"
+          aria-label="jp — back to top"
         >
           jp
         </a>

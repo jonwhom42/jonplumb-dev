@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import type { Project, StatusDot } from "../data/projects";
 import DemoVideo from "./DemoVideo";
 
@@ -55,7 +54,6 @@ export default function ProjectCard({ project }: { project: Project }) {
                 className="inline-flex items-center gap-1.5 rounded-md border border-border px-4 py-2 text-sm text-text transition-colors hover:border-amber hover:text-amber"
               >
                 {link.label}
-                <ArrowUpRight size={15} aria-hidden="true" />
               </a>
               {link.note && (
                 <p className="mt-1.5 font-mono text-xs text-muted">{link.note}</p>
