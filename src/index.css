@@ -47,6 +47,24 @@
     transform: none;
   }
 
+  /* One-shot typewriter for the hero ghost suggestion ("try: whoami" = 11ch) */
+  .typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+    width: 11ch;
+    animation: type-in 1.6s steps(11, end) 0.4s both;
+  }
+  @keyframes type-in {
+    from {
+      width: 0;
+    }
+    to {
+      width: 11ch;
+    }
+  }
+
   /* Restrained CRT scanline over the terminal output */
   .terminal-scan {
     background-image: repeating-linear-gradient(
@@ -90,5 +108,10 @@
   .reveal {
     opacity: 1;
     transform: none;
+  }
+  /* Ghost suggestion renders instantly as static text — no typing animation */
+  .typewriter {
+    width: auto;
+    animation: none;
   }
 }

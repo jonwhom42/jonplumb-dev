@@ -47,10 +47,14 @@ const handlers: Record<string, () => CommandResult> = {
   }),
 
   projects: () => ({
-    lines: projects.flatMap((p) => [
-      `${p.name} — ${p.oneLiner}`,
-      `  ${p.url ? "https://" + p.url : "self-hosted — ask me about it"}`,
-    ]),
+    lines: [
+      ...projects.flatMap((p) => [
+        `${p.name} — ${p.oneLiner}`,
+        `  ${p.url ? "https://" + p.url : "self-hosted — ask me about it"}`,
+      ]),
+      "",
+      "→ full writeups in [[#work|Selected Work]]",
+    ],
   }),
 
   stack: () => ({
@@ -70,6 +74,7 @@ const handlers: Record<string, () => CommandResult> = {
     lines: [
       "good instinct.",
       `→ ${site.email} — or just ask me how I'd approach your problem.`,
+      "[[#contact|→ jump to the contact section]]",
     ],
   }),
 

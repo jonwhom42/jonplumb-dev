@@ -56,7 +56,13 @@ export default function Hero() {
           {content.hero.currently}
         </p>
 
-        <p className="mt-10 font-mono text-xs text-muted">{content.hero.hint}</p>
+        <p className="mt-10 font-mono text-xs text-muted">
+          <span className="text-amber" aria-hidden="true">
+            ▸{" "}
+          </span>
+          <span className="typewriter">try: whoami</span>
+        </p>
+        <p className="mt-2 font-mono text-xs text-muted">{content.hero.hint}</p>
       </div>
     </section>
   );
