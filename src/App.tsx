@@ -1,5 +1,12 @@
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
+import SelectedWork from "./components/SelectedWork";
+import About from "./components/About";
+import ThePath from "./components/ThePath";
+import Skills from "./components/Skills";
+import Uses from "./components/Uses";
+import Contact from "./components/Contact";
+import Footer from "./components/Footer";
 import { navSections } from "./data/site";
 import { useActiveSection } from "./hooks/useActiveSection";
 
@@ -21,7 +28,15 @@ export default function App() {
 
       <main id="main">
         <Hero />
+        <SelectedWork />
+        <About />
+        <ThePath />
+        <Skills />
+        <Uses />
+        <Contact />
       </main>
+
+      <Footer />
     </>
   );
 }
