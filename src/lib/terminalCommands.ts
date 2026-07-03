@@ -13,6 +13,7 @@ const COMMANDS = [
   "help",
   "about",
   "projects",
+  "approach",
   "stack",
   "path",
   "resume",
@@ -29,6 +30,7 @@ const handlers: Record<string, () => CommandResult> = {
       "available commands:",
       "  about      who I am, briefly",
       "  projects   what I've shipped",
+      "  approach   how I scope an AI solution",
       "  stack      the tools I reach for",
       "  path       how I got here",
       "  resume     open the resume",
@@ -54,6 +56,17 @@ const handlers: Record<string, () => CommandResult> = {
       ]),
       "",
       "→ full writeups in [[#work|Selected Work]]",
+    ],
+  }),
+
+  approach: () => ({
+    lines: [
+      "how I scope an AI solution:",
+      "  1. clarify the actual problem — not the requested feature",
+      "  2. find the cheapest model that survives production",
+      "  3. make it fail-soft — billing, fallbacks, degraded modes",
+      "  4. own the deploy — it isn't shipped until it runs in their world",
+      "→ send a role, I'll send back this, applied.  (see: [[#contact|contact]])",
     ],
   }),
 
