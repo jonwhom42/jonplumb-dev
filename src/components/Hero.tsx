@@ -2,6 +2,7 @@ import { ArrowUpRight, Github, Linkedin } from "lucide-react";
 import { site, content } from "../data/site";
 import { useReveal } from "../hooks/useReveal";
 import CopyEmailButton from "./CopyEmailButton";
+import LabStatus from "./LabStatus";
 
 export default function Hero() {
   const ref = useReveal<HTMLDivElement>();
@@ -11,6 +12,7 @@ export default function Hero() {
       id="top"
       className="mx-auto max-w-content px-6 pb-16 pt-20 md:px-8 md:pb-24 md:pt-28"
     >
+      <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_24rem] lg:items-start lg:gap-10">
       <div ref={ref}>
         <p className="font-mono text-sm text-muted">{content.hero.eyebrow}</p>
 
@@ -63,6 +65,9 @@ export default function Hero() {
           <span className="typewriter">try: whoami</span>
         </p>
         <p className="mt-2 font-mono text-xs text-muted">{content.hero.hint}</p>
+      </div>
+
+        <LabStatus />
       </div>
     </section>
   );

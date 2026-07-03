@@ -1,4 +1,5 @@
-export type StatusDot = "amber" | "green" | "blue";
+import type { StatusDot } from "../lib/statusColors";
+export type { StatusDot };
 
 export interface ProjectLink {
   label: string;

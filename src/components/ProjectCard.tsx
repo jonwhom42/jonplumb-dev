@@ -1,11 +1,6 @@
-import type { Project, StatusDot } from "../data/projects";
+import type { Project } from "../data/projects";
+import { DOT_COLOR } from "../lib/statusColors";
 import DemoVideo from "./DemoVideo";
-
-const DOT_COLOR: Record<StatusDot, string> = {
-  amber: "#FBBF24",
-  green: "#4ADE80",
-  blue: "#60A5FA",
-};
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (

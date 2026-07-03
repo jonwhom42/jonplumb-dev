@@ -47,6 +47,22 @@ export const content = {
   },
 } as const;
 
+/**
+ * Hero "lab status" readout (≥1024px). A stylized listing of TRUE, static,
+ * identity-stable labels — NOT live telemetry. No uptimes, counts, or
+ * timestamps (honesty guardrail).
+ */
+export const labStatus = {
+  title: "jon@plumb.dev — lab status",
+  services: [
+    { name: "hermes.service", dot: "blue", status: "running", desc: "multi-agent platform" },
+    { name: "ollama", dot: "blue", status: "local fallback", desc: "dedicated GPU host" },
+    { name: "nitruz", dot: "amber", status: "pre-launch", desc: "nitruz.com" },
+    { name: "resumeaye", dot: "green", status: "live", desc: "resume-aye.onrender.com" },
+    { name: "caddy", dot: "blue", status: "reverse proxy", desc: "tailscale-only ingress" },
+  ],
+} as const;
+
 /** Anchor sections used by the nav + IntersectionObserver. */
 export const navSections = [
   { id: "work", label: "Work" },
