@@ -66,6 +66,8 @@ Architecture leaves clean seams for these; none are implemented in v1:
 
 ## JON TODO
 
+> ⚠ **Before sharing the live URL:** `public/resume.pdf` must exist — do not share the link until it ships. The `prebuild` step (`npm run check-assets`) warns loudly if it (or the demo video) is missing.
+
 - [ ] Export resume PDF → `public/resume.pdf` *(components handle its absence gracefully until then)*
 - [ ] Record 45–60s Nitruz demo (raw photo → generated → before/after) → `public/nitruz-demo.mp4` *(the video collapses to a request line until then)*
 - [ ] Verify The Path account mapping + curated repos look right; tidy/pin repos on `jonwhom42`
