@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Section anchor offset so sticky nav doesn't cover headings */
+  section[id],
+  [id="top"] {
+    scroll-margin-top: 5rem;
+  }
+
+  /* Visible focus everywhere — never remove without replacement */
+  :focus-visible {
+    @apply outline-none ring-2 ring-amber ring-offset-2 ring-offset-bg rounded-sm;
+  }
+
+  ::selection {
+    background: rgba(251, 191, 36, 0.25);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* First-view fade-up; JS toggles .is-visible via IntersectionObserver */
+  .reveal {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 250ms ease-out, transform 250ms ease-out;
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Styled <details> for Decisions & Tradeoffs */
+  .decisions summary {
+    @apply cursor-pointer select-none list-none font-mono text-sm text-amber transition-colors;
+  }
+  .decisions summary::-webkit-details-marker {
+    display: none;
+  }
+  .decisions summary::before {
+    content: "▸";
+    @apply mr-2 inline-block text-amber transition-transform;
+  }
+  .decisions[open] summary::before {
+    transform: rotate(90deg);
+  }
+}
+
+/* Reduced motion: kill all transitions, animations, and smooth scroll */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
