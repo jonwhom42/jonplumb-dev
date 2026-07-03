@@ -46,7 +46,7 @@ export default function ThePath() {
                       title={repo.note}
                       className="inline-flex items-center gap-1.5 rounded-md border border-border bg-surface px-3 py-1.5 font-mono text-xs text-text transition-colors hover:border-amber hover:text-amber"
                     >
-                      {repo.name}
+                      {repo.label}
                       <ArrowUpRight size={12} aria-hidden="true" />
                     </a>
                   </li>

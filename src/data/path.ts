@@ -13,6 +13,8 @@
 export interface CuratedRepo {
   name: string;
   href: string;
+  /** display label for the chip (repo name + short qualifier) */
+  label: string;
   /** short note on why it represents this chapter */
   note: string;
 }
@@ -40,11 +42,13 @@ export const pathTiers: PathTier[] = [
     repos: [
       {
         name: "responsive",
+        label: "responsive",
         href: "https://github.com/jplum89/responsive",
         note: "early CSS + responsive layout practice",
       },
       {
         name: "bootleg-reddit-angular",
+        label: "bootleg-reddit-angular",
         href: "https://github.com/jplum89/bootleg-reddit-angular",
         note: "the jump from vanilla JS to an Angular app",
       },
@@ -60,11 +64,13 @@ export const pathTiers: PathTier[] = [
     repos: [
       {
         name: "LibraryProject",
+        label: "LibraryProject",
         href: "https://github.com/jonplumb89/LibraryProject",
         note: "structured C#/.NET application",
       },
       {
         name: "study-buddy",
+        label: "study-buddy",
         href: "https://github.com/jonplumb89/study-buddy",
         note: "first real full-stack app",
       },
@@ -76,15 +82,17 @@ export const pathTiers: PathTier[] = [
     account: "github.com/jonwhom42",
     accountUrl: "https://github.com/jonwhom42",
     blurb:
-      "Current work: Nitruz, ResumeAye, Hermes. Production AI and agentic systems.",
+      "Current work lives in production, not just public repos — Nitruz, ResumeAye, and Hermes are all above. These are two smaller open builds from the same period:",
     repos: [
       {
         name: "newsGenie",
+        label: "newsGenie — LangGraph",
         href: "https://github.com/jonwhom42/newsGenie",
         note: "AI news assistant built on LangGraph",
       },
       {
         name: "claude-kit-dev",
+        label: "claude-kit-dev — Claude Code tooling",
         href: "https://github.com/jonwhom42/claude-kit-dev",
         note: "Claude Code toolkit for developers",
       },
