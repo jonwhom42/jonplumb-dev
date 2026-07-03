@@ -13,6 +13,7 @@ import { site, navSections } from "./data/site";
 import { useActiveSection } from "./hooks/useActiveSection";
 import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
 import { useCopyToClipboard } from "./hooks/useCopyToClipboard";
+import { onAnchorClick } from "./lib/scrollToHash";
 
 const sectionIds = navSections.map((s) => s.id);
 
@@ -48,6 +49,7 @@ export default function App() {
     <>
       <a
         href="#main"
+        onClick={(e) => onAnchorClick(e, "#main")}
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-amber focus:px-4 focus:py-2 focus:font-medium focus:text-bg"
       >
         Skip to content
@@ -55,7 +57,7 @@ export default function App() {
 
       <Nav active={active} />
 
-      <main id="main">
+      <main id="main" tabIndex={-1} className="outline-none">
         <Hero />
         <SelectedWork />
         <About />

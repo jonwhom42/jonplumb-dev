@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { site, navSections } from "../data/site";
+import { onAnchorClick } from "../lib/scrollToHash";
 
 interface NavProps {
   active: string;
@@ -22,6 +23,7 @@ export default function Nav({ active }: NavProps) {
       >
         <a
           href="#top"
+          onClick={(e) => onAnchorClick(e, "#top")}
           className="font-mono text-lg font-medium text-text"
           aria-label="jp — back to top"
         >
@@ -34,6 +36,7 @@ export default function Nav({ active }: NavProps) {
             <li key={s.id}>
               <a
                 href={`#${s.id}`}
+                onClick={(e) => onAnchorClick(e, `#${s.id}`)}
                 className={linkClass(s.id)}
                 aria-current={active === s.id ? "true" : undefined}
               >
@@ -77,7 +80,10 @@ export default function Nav({ active }: NavProps) {
               <li key={s.id}>
                 <a
                   href={`#${s.id}`}
-                  onClick={() => setOpen(false)}
+                  onClick={(e) => {
+                    onAnchorClick(e, `#${s.id}`);
+                    setOpen(false);
+                  }}
                   className={`block py-3 ${linkClass(s.id)}`}
                   aria-current={active === s.id ? "true" : undefined}
                 >
