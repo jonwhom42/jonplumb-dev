@@ -9,7 +9,7 @@ const DOT_COLOR: Record<StatusDot, string> = {
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="rounded-lg border border-border bg-surface p-6 transition-colors hover:border-muted/50 hover:bg-surface2 md:p-8">
+    <article className="rounded-lg border border-border bg-surface p-6 transition-colors hover:border-amberDim/60 hover:bg-surface2 md:p-8">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
         <h3 className="text-xl font-semibold text-text">
           {project.name}

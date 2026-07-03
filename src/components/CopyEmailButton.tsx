@@ -15,7 +15,7 @@ export default function CopyEmailButton({ className = "" }: CopyEmailButtonProps
       type="button"
       onClick={() => copy(site.email)}
       aria-label={`Copy email address ${site.email}`}
-      className={`inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 font-mono text-sm transition-colors hover:border-muted hover:bg-surface2 ${
+      className={`inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 font-mono text-sm transition-colors hover:border-amberDim hover:bg-surface2 ${
         copied ? "text-amber" : "text-muted"
       } ${className}`}
     >

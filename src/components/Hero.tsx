@@ -36,7 +36,7 @@ export default function Hero() {
             href={site.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm text-text transition-colors hover:border-muted hover:bg-surface2"
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm text-text transition-colors hover:border-amberDim hover:bg-surface2"
           >
             <Github size={16} aria-hidden="true" /> GitHub
           </a>
@@ -44,7 +44,7 @@ export default function Hero() {
             href={site.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm text-text transition-colors hover:border-muted hover:bg-surface2"
+            className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm text-text transition-colors hover:border-amberDim hover:bg-surface2"
           >
             <Linkedin size={16} aria-hidden="true" /> LinkedIn
           </a>

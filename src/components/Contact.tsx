@@ -22,7 +22,7 @@ export default function Contact() {
           href={site.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm text-text transition-colors hover:border-muted hover:bg-surface2"
+          className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm text-text transition-colors hover:border-amberDim hover:bg-surface2"
         >
           <Linkedin size={16} aria-hidden="true" /> LinkedIn
           <ArrowUpRight size={14} aria-hidden="true" />
@@ -31,7 +31,7 @@ export default function Contact() {
           href={site.resume}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm text-text transition-colors hover:border-muted hover:bg-surface2"
+          className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2.5 text-sm text-text transition-colors hover:border-amberDim hover:bg-surface2"
         >
           Resume <ArrowUpRight size={14} aria-hidden="true" />
         </a>
