@@ -23,6 +23,28 @@ export interface Project {
   footnote?: string;
 }
 
+/** Compact "Also built" rows under the main cards — mini-links, not full cards. */
+export interface AlsoBuiltRepo {
+  name: string;
+  oneLiner: string;
+  href: string;
+}
+
+export const alsoBuilt: AlsoBuiltRepo[] = [
+  {
+    name: "claude-kit-dev",
+    oneLiner:
+      "A phase-based Claude Code workflow system: ~140 structured docs across 10 dev phases, custom slash commands, and a self-correcting lessons file. The tooling behind how I ship.",
+    href: "https://github.com/jonwhom42/claude-kit-dev",
+  },
+  {
+    name: "newsGenie",
+    oneLiner:
+      "A LangGraph news agent — multi-step agent orchestration outside the MCP ecosystem.",
+    href: "https://github.com/jonwhom42/newsGenie",
+  },
+];
+
 export const projects: Project[] = [
   {
     id: "nitruz",
