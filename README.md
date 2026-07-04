@@ -47,7 +47,7 @@ The three accounts and their curated repos are static data in [`src/data/path.ts
 | 2021 · Back-end & full-stack | [jonplumb89](https://github.com/jonplumb89) | C#/.NET → full-stack ✓ |
 | 2026 · Building with AI | [jonwhom42](https://github.com/jonwhom42) | TS/Python/Shell AI work ✓ |
 
-> Note: the flagship projects (Nitruz, ResumeAye, Hermes) are **not** public repos on `jonwhom42` — they're private or hosted elsewhere, and each has a full card in **Selected Work**. Tier 3 therefore links the strongest *public* AI repos instead. See the JON TODO below.
+> Note: the flagship projects (Nitruz, ResumeAye, The Lab) are **not** public repos on `jonwhom42` — they're private or self-hosted, and each has a full card in **Selected Work**. Tier 3 therefore links the strongest *public* AI repos instead. See the JON TODO below.
 
 ## Deploy (Netlify)
 
@@ -61,8 +61,8 @@ The three accounts and their curated repos are static data in [`src/data/path.ts
 
 Architecture leaves clean seams for these; none are implemented in v1:
 
-1. **Ask My Portfolio** — a chat widget grounded in the resume/site content via a Netlify Function + Gemini Flash, with a hard daily request cap, prompt-injection guardrails, and scope strictly limited to "questions about Jon." (API key would live in Netlify env — never the client.) The `netlify/functions/` convention is kept in mind.
-2. **Hermes interactive architecture diagram** — a hover/click-annotated routing diagram augmenting the Hermes card.
+1. **Hermes Concierge** — scoped, serverless recruiter-facing chat widget (Netlify Function + Gemini, markdown context library, hard daily cap). Next phase.
+2. **Lab interactive architecture diagram** — a hover/click-annotated routing diagram augmenting The Lab card.
 3. **Product demo video (Nitruz before/after)** — future.
 
 ## JON TODO

@@ -21,6 +21,8 @@ export interface Project {
   links: ProjectLink[];
   /** muted note rendered under the card (The Lab) */
   footnote?: string;
+  /** single-line override for the terminal `projects` listing (The Lab) */
+  terminalLine?: string;
 }
 
 /** Compact "Also built" rows under the main cards — mini-links, not full cards. */
@@ -123,5 +125,7 @@ export const projects: Project[] = [
     links: [],
     footnote:
       "No public repo — the lab runs dark by design. Ask me about the architecture.",
+    terminalLine:
+      "The Lab — hardened multi-machine AI lab running Hermes, a multi-agent platform (self-hosted, runs dark)",
   },
 ];

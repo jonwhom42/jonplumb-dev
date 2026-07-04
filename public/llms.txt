@@ -6,7 +6,7 @@
 ## Projects
 - Nitruz (https://nitruz.com): AI vehicle photography SaaS — live, pre-launch
 - ResumeAye (https://resume-aye.onrender.com/): AI resume-tailoring SaaS — live
-- Hermes: self-hosted multi-agent platform (MCP, Claude, Ollama fallback)
+- The Lab: hardened multi-machine AI lab running Hermes, a self-hosted multi-agent platform (MCP, Claude, Ollama fallback)
 
 ## Contact
 - Email: jon.plumb89@outlook.com

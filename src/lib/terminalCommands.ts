@@ -50,10 +50,14 @@ const handlers: Record<string, () => CommandResult> = {
 
   projects: () => ({
     lines: [
-      ...projects.flatMap((p) => [
-        `${p.name} — ${p.oneLiner}`,
-        `  ${p.url ? "https://" + p.url : "self-hosted — ask me about it"}`,
-      ]),
+      ...projects.flatMap((p) =>
+        p.terminalLine
+          ? [p.terminalLine]
+          : [
+              `${p.name} — ${p.oneLiner}`,
+              `  ${p.url ? "https://" + p.url : "self-hosted — ask me about it"}`,
+            ]
+      ),
       "",
       "→ full writeups in [[#work|Selected Work]]",
     ],

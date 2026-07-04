@@ -6,7 +6,7 @@
 //   jonwhom42 (2025–26, TS/Python/Shell AI) = building with AI
 //
 // Curated repos are static — NO runtime GitHub calls.
-// NOTE: Nitruz / ResumeAye / Hermes are not public repos on jonwhom42
+// NOTE: Nitruz / ResumeAye / The Lab are not public repos on jonwhom42
 // (private / hosted elsewhere), so tier 3 links the strongest public AI repos.
 // curated 2026-07-03
 
@@ -82,7 +82,7 @@ export const pathTiers: PathTier[] = [
     account: "github.com/jonwhom42",
     accountUrl: "https://github.com/jonwhom42",
     blurb:
-      "Current work lives in production, not just public repos — Nitruz, ResumeAye, and Hermes are all above. These are two smaller open builds from the same period:",
+      "Current work lives in production, not just public repos — Nitruz, ResumeAye, and The Lab are all above. These are two smaller open builds from the same period:",
     repos: [
       {
         name: "newsGenie",
