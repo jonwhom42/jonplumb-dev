@@ -1,0 +1,14 @@
+# Jonathon Plumb — AI Solutions Engineer
+
+> Portfolio of Jon Plumb: production generative-AI and agentic systems.
+> Building with LLMs since the GPT-3 era. Detroit, MI.
+
+## Projects
+- Nitruz (https://nitruz.com): AI vehicle photography SaaS — live, pre-launch
+- ResumeAye (https://resume-aye.onrender.com/): AI resume-tailoring SaaS — live
+- Hermes: self-hosted multi-agent platform (MCP, Claude, Ollama fallback)
+
+## Contact
+- Email: jon.plumb89@outlook.com
+- GitHub: https://github.com/jonwhom42
+- Resume: /resume.pdf
