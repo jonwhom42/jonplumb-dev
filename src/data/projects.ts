@@ -19,10 +19,8 @@ export interface Project {
   tags: string[];
   decisions: string[];
   links: ProjectLink[];
-  /** muted note rendered under the card (Hermes) */
+  /** muted note rendered under the card (The Lab) */
   footnote?: string;
-  /** render the <DemoVideo/> inside this card (Nitruz) */
-  hasDemo?: boolean;
 }
 
 export const projects: Project[] = [
@@ -41,7 +39,6 @@ export const projects: Project[] = [
       "Mobile-first before/after slider — dealership users shoot on phones on the lot; the proof moment has to work one-handed in sunlight.",
     ],
     links: [{ label: "Visit nitruz.com ↗", href: "https://nitruz.com" }],
-    hasDemo: true,
   },
   {
     id: "resumeaye",

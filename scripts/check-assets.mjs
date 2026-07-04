@@ -12,10 +12,6 @@ const assets = [
     path: "public/resume.pdf",
     warn: "⚠ public/resume.pdf missing — do not share the live URL until it ships.",
   },
-  {
-    path: "public/nitruz-demo.mp4",
-    warn: "⚠ public/nitruz-demo.mp4 missing — the Nitruz demo will show the request fallback.",
-  },
 ];
 
 let missing = 0;

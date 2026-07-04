@@ -1,6 +1,5 @@
 import type { Project } from "../data/projects";
 import { DOT_COLOR } from "../lib/statusColors";
-import DemoVideo from "./DemoVideo";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
@@ -57,8 +56,6 @@ export default function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
       )}
-
-      {project.hasDemo && <DemoVideo />}
 
       <details className="decisions mt-5 border-t border-border pt-4">
         <summary>Decisions &amp; Tradeoffs</summary>
