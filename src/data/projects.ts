@@ -91,7 +91,7 @@ export const projects: Project[] = [
       {
         label: "Launch demo ↗",
         href: "https://resume-aye.onrender.com/",
-        note: "free-tier host — give it ~30s to wake up ☕",
+        note: "free-tier host (~30s to wake up)",
       },
     ],
   },
