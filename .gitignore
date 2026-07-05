@@ -28,3 +28,6 @@ Thumbs.db
 .env.*
 !.env.example
 .gstack/
+
+# Local Netlify folder
+.netlify
