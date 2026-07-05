@@ -73,7 +73,8 @@ Architecture leaves clean seams for these; none are implemented in v1:
 
 - [x] Export resume PDF → `public/resume.pdf` *(in place; components still handle its absence gracefully)*
 - [ ] Verify The Path account mapping + curated repos look right; tidy/pin repos on `jonwhom42`
-- [ ] Push to GitHub (`jonwhom42`), connect Netlify, buy/point `jonplumb.dev` DNS
+- [x] Push to GitHub → [jonwhom42/jonplumb-dev](https://github.com/jonwhom42/jonplumb-dev); connected to Netlify with continuous deploys — live at [jonplumb-dev.netlify.app](https://jonplumb-dev.netlify.app)
+- [ ] Buy/point `jonplumb.dev` DNS (Netlify → Domain management); site meta/OG/sitemap already assume it
 - [ ] After launch: add `jonplumb.dev` to resume header + LinkedIn, re-export resume PDF
 
 ---
