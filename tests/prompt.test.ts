@@ -25,4 +25,10 @@ describe("system prompt", () => {
     expect(SYSTEM_PROMPT).toContain("What salary is he looking for?");
     expect(SYSTEM_PROMPT).toContain("weather");
   });
+
+  it("teaches fit-mapping mode for pasted job descriptions", () => {
+    expect(SYSTEM_PROMPT).toContain("JOB DESCRIPTION ANALYSIS");
+    expect(SYSTEM_PROMPT).toContain("point by point");
+    expect(SYSTEM_PROMPT).toContain("honest about gaps");
+  });
 });

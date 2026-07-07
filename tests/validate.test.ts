@@ -57,4 +57,11 @@ describe("validateRequest", () => {
     expect(r.ok).toBe(true);
     if (r.ok) expect(r.messages[0].content).toBe("hi there [31m");
   });
+
+  it("preserves newlines (pasted job descriptions keep their structure)", () => {
+    const jd = "Requirements:\n- 3+ years LLM apps\n- MCP experience";
+    const r = validateRequest({ messages: [user(jd)] });
+    expect(r.ok).toBe(true);
+    if (r.ok) expect(r.messages[0].content).toBe(jd);
+  });
 });

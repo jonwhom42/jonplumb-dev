@@ -3,9 +3,9 @@
 import type { ChatMessage, ChatRequest } from "./types";
 import { LIMITS } from "./types";
 
-// Replace all control characters (incl. newlines/tabs) with spaces - input
-// hygiene for a single-line chat composer.
-const CONTROL_CHARS = /\p{Cc}/gu;
+// Strip control characters but preserve \n and \t — pasted job descriptions
+// carry structure in their line breaks.
+const CONTROL_CHARS = /(?![\n\t])\p{Cc}/gu;
 
 export type ValidationResult =
   | { ok: true; messages: ChatMessage[] }

@@ -25,7 +25,8 @@ type Action =
 
 /** Client-side conversation ceiling (server enforces the same bound). */
 export const MAX_USER_MESSAGES = 10;
-export const MAX_INPUT_CHARS = 1000;
+/** Sized so a full pasted job description fits (server enforces the same). */
+export const MAX_INPUT_CHARS = 6000;
 
 const STORAGE_KEY = "hermes-concierge-v1";
 const INITIAL: State = { messages: [], status: "idle", lastProvider: null };

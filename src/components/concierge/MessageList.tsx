@@ -50,7 +50,7 @@ export default function MessageList({
         {messages.map((m, i) => {
           if (m.role === "user") {
             return (
-              <p key={i} className="mb-2 text-text">
+              <p key={i} className="mb-2 whitespace-pre-wrap text-text">
                 <span className="text-amber">you:</span>{" "}
                 <span className="text-muted">{m.content}</span>
               </p>

@@ -30,10 +30,11 @@ export interface ChatError {
 export const LIMITS = {
   /** hard cap on messages accepted in one conversation payload */
   maxMessages: 20,
-  /** hard cap on a single message's length (chars) */
-  maxMessageChars: 1000,
+  /** hard cap on a single message's length (chars) — sized so a full pasted
+   *  job description (typically 3–6K chars) fits for fit-mapping mode */
+  maxMessageChars: 6000,
   /** only this many trailing messages are forwarded to the LLM */
   forwardedMessages: 12,
-  /** output token ceiling per reply */
-  maxOutputTokens: 512,
+  /** output token ceiling per reply — headroom for point-by-point JD analysis */
+  maxOutputTokens: 1024,
 } as const;

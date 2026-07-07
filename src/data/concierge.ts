@@ -13,8 +13,8 @@ export const concierge = {
   name: "Hermes Concierge",
   prompt: "hermes@concierge:~$",
   intro:
-    "Hi — I'm Jon's portfolio assistant, running on the same cloud-with-fallback pattern as Hermes. Ask me anything about his work, stack, or fit for your role.",
-  inputPlaceholder: "ask about jon…",
+    "Hi — I'm Jon's portfolio assistant, running on the same cloud-with-fallback pattern as Hermes. Ask me anything about his work or stack — or paste a job description and I'll map his fit against it, point by point.",
+  inputPlaceholder: "ask about jon — or paste a job description…",
 } as const;
 
 /** First-touch suggested questions. Rendered as chips; echoed in the prompt. */

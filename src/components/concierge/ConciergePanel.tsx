@@ -16,7 +16,7 @@ export default function ConciergePanel({ chat, onClose }: ConciergePanelProps) {
   const { messages, status, lastProvider, conversationFull, send } = chat;
 
   const panelRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const restoreRef = useRef<HTMLElement | null>(null);
 
   // Focus management: capture opener, focus composer, restore on unmount.
@@ -40,7 +40,7 @@ export default function ConciergePanel({ chat, onClose }: ConciergePanelProps) {
     }
     if (e.key === "Tab") {
       const focusables = panelRef.current?.querySelectorAll<HTMLElement>(
-        'button:not([disabled]), input, a[href], [tabindex]:not([tabindex="-1"])'
+        'button:not([disabled]), input, textarea, a[href], [tabindex]:not([tabindex="-1"])'
       );
       if (!focusables || focusables.length === 0) return;
       const first = focusables[0];
