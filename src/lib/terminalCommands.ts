@@ -6,7 +6,9 @@ import { pathTiers } from "../data/path";
 export interface CommandResult {
   lines: string[];
   /** side effect for the Terminal component to perform */
-  action?: "clear" | "exit" | "open-resume";
+  action?: "clear" | "exit" | "open-resume" | "open-concierge";
+  /** extra data for the action (e.g. the question to hand the concierge) */
+  payload?: string;
 }
 
 const COMMANDS = [
@@ -16,6 +18,7 @@ const COMMANDS = [
   "approach",
   "stack",
   "path",
+  "ask",
   "resume",
   "hire",
   "cats",
@@ -33,6 +36,7 @@ const handlers: Record<string, () => CommandResult> = {
       "  approach   how I scope an AI solution",
       "  stack      the tools I reach for",
       "  path       how I got here",
+      "  ask        chat with Hermes Concierge (ask <question>)",
       "  resume     open the resume",
       "  hire       let's talk",
       "  whoami     you, probably",
@@ -82,6 +86,8 @@ const handlers: Record<string, () => CommandResult> = {
     lines: pathTiers.map((t) => `${t.year}  ${t.title} — ${t.account}`),
   }),
 
+  // `ask` is handled in runCommand (it takes arguments)
+
   resume: () => ({
     lines: ["opening resume.pdf…"],
     action: "open-resume",
@@ -111,8 +117,25 @@ const handlers: Record<string, () => CommandResult> = {
 };
 
 export function runCommand(raw: string): CommandResult {
-  const cmd = raw.trim().toLowerCase();
-  if (cmd === "") return { lines: [] };
+  const trimmed = raw.trim();
+  if (trimmed === "") return { lines: [] };
+
+  // `ask <question>` hands the question straight to the concierge
+  const [first, ...rest] = trimmed.split(/\s+/);
+  if (first.toLowerCase() === "ask") {
+    const question = rest.join(" ");
+    return {
+      lines: [
+        question
+          ? `routing "${question}" to hermes concierge…`
+          : "routing to hermes concierge…",
+      ],
+      action: "open-concierge",
+      payload: question || undefined,
+    };
+  }
+
+  const cmd = trimmed.toLowerCase();
   const handler = handlers[cmd];
   if (handler) return handler();
   return { lines: [`command not found: ${cmd} — try 'help'`] };

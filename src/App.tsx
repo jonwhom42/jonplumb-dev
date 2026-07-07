@@ -9,6 +9,7 @@ import Uses from "./components/Uses";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Terminal from "./components/Terminal";
+import ConciergeWidget from "./components/concierge/ConciergeWidget";
 import { site, navSections } from "./data/site";
 import { useActiveSection } from "./hooks/useActiveSection";
 import { useKeyboardShortcuts } from "./hooks/useKeyboardShortcuts";
@@ -20,8 +21,22 @@ const sectionIds = navSections.map((s) => s.id);
 export default function App() {
   const active = useActiveSection(sectionIds);
   const [terminalOpen, setTerminalOpen] = useState(false);
+  const [conciergeOpen, setConciergeOpen] = useState(false);
+  const [conciergePrefill, setConciergePrefill] = useState<string | undefined>();
   const [toast, setToast] = useState("");
   const { copy } = useCopyToClipboard();
+
+  // Single-overlay invariant: opening either overlay closes the other.
+  const openConcierge = useCallback((prefill?: string) => {
+    setTerminalOpen(false);
+    setConciergePrefill(prefill);
+    setConciergeOpen(true);
+  }, []);
+
+  const openTerminal = useCallback(() => {
+    setConciergeOpen(false);
+    setTerminalOpen(true);
+  }, []);
 
   useEffect(() => {
     if (!toast) return;
@@ -38,8 +53,8 @@ export default function App() {
   }, [copy]);
 
   useKeyboardShortcuts({
-    enabled: !terminalOpen,
-    onTerminal: () => setTerminalOpen((v) => !v),
+    enabled: !terminalOpen && !conciergeOpen,
+    onTerminal: () => (terminalOpen ? setTerminalOpen(false) : openTerminal()),
     onResume: () => openInNewTab(site.resume),
     onGithub: () => openInNewTab(site.github),
     onCopyEmail: handleCopyEmail,
@@ -69,7 +84,19 @@ export default function App() {
 
       <Footer />
 
-      <Terminal open={terminalOpen} onClose={() => setTerminalOpen(false)} />
+      <Terminal
+        open={terminalOpen}
+        onClose={() => setTerminalOpen(false)}
+        onOpenConcierge={openConcierge}
+      />
+
+      <ConciergeWidget
+        open={conciergeOpen}
+        onOpen={() => openConcierge()}
+        onClose={() => setConciergeOpen(false)}
+        prefill={conciergePrefill}
+        onPrefillConsumed={() => setConciergePrefill(undefined)}
+      />
 
       {/* Shortcut toast (e = copy email) */}
       <div

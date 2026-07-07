@@ -1,47 +1,15 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  type KeyboardEvent,
-  type ReactNode,
-} from "react";
+import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { X } from "lucide-react";
 import { site } from "../data/site";
 import { runCommand } from "../lib/terminalCommands";
 import { scrollToHash } from "../lib/scrollToHash";
-
-// Parse `[[#hash|label]]` tokens into clickable in-terminal deep-links.
-const LINK_RE = /\[\[(#[^\]|]+)\|([^\]]+)\]\]/g;
-
-function renderLine(text: string, onNavigate: (hash: string) => void): ReactNode {
-  if (!text.includes("[[")) return text;
-  const parts: ReactNode[] = [];
-  let last = 0;
-  let m: RegExpExecArray | null;
-  LINK_RE.lastIndex = 0;
-  let key = 0;
-  while ((m = LINK_RE.exec(text)) !== null) {
-    if (m.index > last) parts.push(text.slice(last, m.index));
-    const hash = m[1];
-    parts.push(
-      <button
-        key={key++}
-        type="button"
-        onClick={() => onNavigate(hash)}
-        className="text-amber underline underline-offset-2 hover:opacity-80"
-      >
-        {m[2]}
-      </button>
-    );
-    last = m.index + m[0].length;
-  }
-  if (last < text.length) parts.push(text.slice(last));
-  return parts;
-}
+import { renderChatLinks } from "../lib/renderChatLinks";
 
 interface TerminalProps {
   open: boolean;
   onClose: () => void;
+  /** `ask [question]` hands off to the Hermes Concierge widget */
+  onOpenConcierge: (prefill?: string) => void;
 }
 
 interface Line {
@@ -56,7 +24,7 @@ const WELCOME: Line[] = [
   { kind: "output", text: "type 'help' for commands, 'exit' or Esc to close." },
 ];
 
-export default function Terminal({ open, onClose }: TerminalProps) {
+export default function Terminal({ open, onClose, onOpenConcierge }: TerminalProps) {
   const [lines, setLines] = useState<Line[]>(WELCOME);
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<string[]>([]);
@@ -115,6 +83,11 @@ export default function Terminal({ open, onClose }: TerminalProps) {
     }
     if (result.action === "open-resume") {
       window.open(site.resume, "_blank", "noopener,noreferrer");
+    }
+    if (result.action === "open-concierge") {
+      setInput("");
+      onOpenConcierge(result.payload);
+      return;
     }
 
     setLines((prev) => [
@@ -214,7 +187,7 @@ export default function Terminal({ open, onClose }: TerminalProps) {
               </p>
             ) : (
               <p key={i} className="whitespace-pre-wrap text-muted">
-                {renderLine(line.text, navigateTo)}
+                {renderChatLinks(line.text, navigateTo)}
               </p>
             )
           )}

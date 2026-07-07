@@ -31,3 +31,6 @@ Thumbs.db
 
 # Local Netlify folder
 .netlify
+
+# Netlify CLI edge-runtime lockfile (local tooling)
+deno.lock
