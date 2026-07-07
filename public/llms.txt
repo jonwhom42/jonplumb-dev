@@ -8,6 +8,14 @@
 - ResumeAye (https://resume-aye.onrender.com/): AI resume-tailoring SaaS — live
 - The Lab: hardened multi-machine AI lab running Hermes, a self-hosted multi-agent platform (MCP, Claude, Ollama fallback)
 
+## Ask My Portfolio
+This site hosts Hermes Concierge, an AI assistant (bottom-right chat widget)
+grounded in a verified knowledge base about Jon. Recruiters can ask it
+anything — work authorization, availability, project depth — or paste a full
+job description and it maps Jon's experience against the requirements point
+by point. It is itself one of Jon's builds: serverless, guardrailed,
+provider-fallback-routed, structurally cost-capped.
+
 ## Contact
 - Email: jon.plumb89@outlook.com
 - GitHub: https://github.com/jonwhom42

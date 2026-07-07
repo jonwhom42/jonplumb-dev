@@ -116,6 +116,10 @@ export default function ConciergePanel({ chat, onClose }: ConciergePanelProps) {
           onSend={send}
           inputRef={inputRef}
         />
+
+        <p className="border-t border-border/50 px-4 py-1.5 font-mono text-[0.6rem] leading-snug text-muted/60">
+          {concierge.privacyNote}
+        </p>
       </div>
     </>
   );

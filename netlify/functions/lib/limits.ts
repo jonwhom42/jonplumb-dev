@@ -32,7 +32,8 @@ export function capsFromEnv(env: Record<string, string | undefined>): Caps {
   return {
     global: num(env.CONCIERGE_GLOBAL_CAP, 300),
     claude: num(env.CLAUDE_DAILY_CAP, 200),
-    ip: num(env.CONCIERGE_IP_CAP, 20),
+    // 40/day: corporate NAT means several recruiters can share one IP
+    ip: num(env.CONCIERGE_IP_CAP, 40),
   };
 }
 

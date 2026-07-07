@@ -79,7 +79,7 @@ export default function App() {
         <ThePath />
         <Skills />
         <Uses />
-        <Contact />
+        <Contact onOpenConcierge={() => openConcierge()} />
       </main>
 
       <Footer />

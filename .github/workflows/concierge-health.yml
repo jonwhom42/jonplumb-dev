@@ -1,0 +1,20 @@
+# Scheduled health probe for the Hermes Concierge function.
+# Hits the no-cost GET health endpoint every 6 hours; a failing run makes
+# GitHub email the repo owner automatically — free alerting, no accounts.
+name: concierge-health
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe /api/chat health
+        run: |
+          body=$(curl -sS --max-time 20 https://jonplumb-dev.netlify.app/api/chat)
+          echo "response: $body"
+          echo "$body" | grep -q '"ok":true' || { echo "health check FAILED"; exit 1; }
+          echo "$body" | grep -q '"gemini":true' || { echo "GEMINI_API_KEY missing in production"; exit 1; }

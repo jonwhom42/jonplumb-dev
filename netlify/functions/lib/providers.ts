@@ -11,11 +11,14 @@ import type { ChatMessage } from "./types";
 import { LIMITS } from "./types";
 
 /** Gemini gets the wall-clock budget; leave room for the Claude fallback within Netlify's 10s. */
-const GEMINI_TIMEOUT_MS = 6_000;
+const GEMINI_TIMEOUT_MS = 5_000;
 const CLAUDE_TIMEOUT_MS = 3_500;
+/** Pause before the single retry on a Gemini rate-limit (free tier is ~10 RPM). */
+const GEMINI_RETRY_DELAY_MS = 2_000;
 
 const CLAUDE_MODEL = "claude-haiku-4-5";
-const GEMINI_MODEL = "gemini-2.5-flash";
+/** Overridable in Netlify env — flip to a Pro model on the paid tier without a code change. */
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-flash-latest";
 
 let anthropic: Anthropic | null = null;
 function client(): Anthropic {
@@ -62,6 +65,25 @@ export async function askGemini(
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("gemini: GEMINI_API_KEY not set");
 
+  try {
+    return await geminiCall(key, system, messages);
+  } catch (err) {
+    // One retry on a rate-limit only — 429s return instantly, so the pause +
+    // second attempt still fits Netlify's 10s function budget. Timeouts and
+    // 5xx fall straight through to the caller's fallback path.
+    if (err instanceof Error && /^gemini: HTTP 429\b/.test(err.message)) {
+      await new Promise((r) => setTimeout(r, GEMINI_RETRY_DELAY_MS));
+      return geminiCall(key, system, messages);
+    }
+    throw err;
+  }
+}
+
+async function geminiCall(
+  key: string,
+  system: string,
+  messages: ChatMessage[]
+): Promise<string> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), GEMINI_TIMEOUT_MS);
 
@@ -83,7 +105,7 @@ export async function askGemini(
           })),
           generationConfig: {
             maxOutputTokens: LIMITS.maxOutputTokens,
-            // 2.5 Flash thinks by default and thinking tokens count against
+            // Flash models think by default and thinking tokens count against
             // maxOutputTokens — disable it so short caps don't truncate replies.
             thinkingConfig: { thinkingBudget: 0 },
           },

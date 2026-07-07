@@ -12,7 +12,7 @@ import { getStore } from "@netlify/blobs";
 import type { CounterStore } from "./lib/limits";
 import { SYSTEM_PROMPT } from "./lib/prompt";
 import { validateRequest } from "./lib/validate";
-import { capsFromEnv, checkAndCount, countClaudeCall } from "./lib/limits";
+import { capsFromEnv, checkAndCount, countClaudeCall, dayKey } from "./lib/limits";
 import { askClaude, askGemini, shouldFallback } from "./lib/providers";
 import type { ChatError, ChatMessage, ChatResponse, Provider } from "./lib/types";
 
@@ -32,6 +32,35 @@ function isMockMode(): boolean {
   return noKeys && process.env.CONTEXT !== "production";
 }
 
+/**
+ * Log Q&A pairs (no IPs, truncated) to Netlify Blobs — one JSON-lines blob per
+ * UTC day. Read with: netlify blobs:get concierge-logs log:YYYY-MM-DD
+ * Best-effort: a lost line under concurrency or a Blobs outage never fails the
+ * request.
+ */
+async function logConversation(entry: {
+  q: string;
+  a: string;
+  p: Provider;
+  ms: number;
+}): Promise<void> {
+  try {
+    const store = getStore("concierge-logs");
+    const key = `log:${dayKey()}`;
+    const line = JSON.stringify({
+      t: new Date().toISOString(),
+      q: entry.q.slice(0, 500),
+      a: entry.a.slice(0, 500),
+      p: entry.p,
+      ms: entry.ms,
+    });
+    const existing = (await store.get(key, { type: "text" })) ?? "";
+    await store.set(key, existing + line + "\n");
+  } catch (err) {
+    console.error("log: failed (non-fatal)", err);
+  }
+}
+
 async function mockReply(messages: ChatMessage[]): Promise<ChatResponse> {
   await new Promise((r) => setTimeout(r, 600));
   const q = messages[messages.length - 1].content;
@@ -45,6 +74,19 @@ async function mockReply(messages: ChatMessage[]): Promise<ChatResponse> {
 }
 
 export default async function handler(req: Request, context: Context) {
+  // Health probe — no LLM call, no budget spend. Used by the scheduled
+  // GitHub Actions check; safe to expose (reveals config presence, no values).
+  if (req.method === "GET") {
+    return new Response(
+      JSON.stringify({
+        ok: true,
+        gemini: Boolean(process.env.GEMINI_API_KEY),
+        claudeFallback: Boolean(process.env.ANTHROPIC_API_KEY),
+        mock: isMockMode(),
+      }),
+      { headers: { "content-type": "application/json" } }
+    );
+  }
   if (req.method !== "POST") {
     return new Response("method not allowed", { status: 405 });
   }
@@ -131,6 +173,13 @@ export default async function handler(req: Request, context: Context) {
       );
     }
   }
+
+  await logConversation({
+    q: validated.messages[validated.messages.length - 1].content,
+    a: reply,
+    p: provider,
+    ms: Date.now() - start,
+  });
 
   return json({ reply, provider });
 }

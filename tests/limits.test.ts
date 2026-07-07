@@ -35,9 +35,9 @@ describe("dayKey", () => {
 
 describe("capsFromEnv", () => {
   it("falls back to defaults on missing/garbage values", () => {
-    expect(capsFromEnv({})).toEqual({ global: 300, claude: 200, ip: 20 });
+    expect(capsFromEnv({})).toEqual({ global: 300, claude: 200, ip: 40 });
     expect(capsFromEnv({ CONCIERGE_GLOBAL_CAP: "nope" }).global).toBe(300);
-    expect(capsFromEnv({ CONCIERGE_IP_CAP: "-5" }).ip).toBe(20);
+    expect(capsFromEnv({ CONCIERGE_IP_CAP: "-5" }).ip).toBe(40);
   });
 
   it("reads overrides", () => {

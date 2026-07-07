@@ -36,8 +36,19 @@ describe("chat handler (mock mode)", () => {
     }
   });
 
-  it("rejects non-POST", async () => {
+  it("answers GET with a health probe (no LLM call)", async () => {
     const res = await handler(new Request("http://localhost/api/chat"), ctx);
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.ok).toBe(true);
+    expect(body.mock).toBe(true);
+  });
+
+  it("rejects other methods", async () => {
+    const res = await handler(
+      new Request("http://localhost/api/chat", { method: "DELETE" }),
+      ctx
+    );
     expect(res.status).toBe(405);
   });
 
