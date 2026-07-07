@@ -19,6 +19,10 @@ import {
   resumeFacts,
   compensationPolicy,
   suggestedQuestions,
+  warStories,
+  depthFacts,
+  workingStyle,
+  deeperQA,
 } from "../../../src/data/concierge";
 
 /** Section hashes the model may deep-link to via [[#hash|label]] tokens. */
@@ -74,6 +78,9 @@ function buildKnowledge(): string {
     .map((f) => `- ${f.topic}: ${f.fact}`)
     .join("\n");
 
+  const facts = (items: { topic: string; fact: string }[]) =>
+    items.map((f) => `- ${f.topic}: ${f.fact}`).join("\n");
+
   return [
     section("Identity & contact", identity),
     section("About", about),
@@ -82,6 +89,10 @@ function buildKnowledge(): string {
     section("The Path (career timeline)", path),
     section("Hardware & tools (/uses)", uses),
     section("Recruiter FAQ (verified facts)", faq),
+    section("Engineering war stories (specific problems Jon solved)", facts(warStories)),
+    section("Depth signals & unlisted work", facts(depthFacts)),
+    section("Working style (evidence-based)", facts(workingStyle)),
+    section("Deeper Q&A (honest answers to hard interviewer questions)", facts(deeperQA)),
     section("Compensation policy", compensationPolicy),
     section(
       "Suggested questions the widget shows",

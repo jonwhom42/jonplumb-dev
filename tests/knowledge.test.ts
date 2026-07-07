@@ -30,9 +30,17 @@ describe("knowledge base", () => {
     expect(KNOWLEDGE).not.toMatch(/\d{4}-\d{2}-\d{2}T/); // no ISO timestamps
   });
 
+  it("carries the war stories and deeper Q&A", () => {
+    expect(KNOWLEDGE).toContain("Engineering war stories");
+    expect(KNOWLEDGE).toContain("65,536"); // context truncation story
+    expect(KNOWLEDGE).toContain("worst-case-ceiling"); // billing invariant
+    expect(KNOWLEDGE).toContain("Nous Research"); // honest Hermes attribution
+    expect(KNOWLEDGE).toContain("Deeper Q&A");
+  });
+
   it("stays within a sane prompt size", () => {
     expect(KNOWLEDGE.length).toBeGreaterThan(2000);
-    expect(KNOWLEDGE.length).toBeLessThan(20000);
+    expect(KNOWLEDGE.length).toBeLessThan(30000);
   });
 
   it("whitelists exactly the site's nav sections", () => {
