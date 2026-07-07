@@ -4,7 +4,7 @@ export const site = {
   email: "jon.plumb89@outlook.com",
   location: "Detroit, MI",
   github: "https://github.com/jonwhom42",
-  linkedin: "https://linkedin.com/in/jonathon-plumb-892229188",
+  linkedin: "https://www.linkedin.com/in/jon-who-62934a39b",
   resume: "/resume.pdf",
   nitruz: "https://nitruz.com",
   resumeaye: "https://resume-aye.onrender.com/",
