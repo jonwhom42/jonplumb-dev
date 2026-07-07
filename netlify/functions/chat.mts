@@ -124,7 +124,7 @@ export default async function handler(req: Request, context: Context) {
     const message =
       decision.reason === "ip"
         ? `You've been chatty — I like it. My per-visitor budget is spent for today, but Jon answers email fast: ${EMAIL}`
-        : `Today's routing budget is spent — structural cost cap, same pattern as Hermes. Back tomorrow, or email Jon directly: ${EMAIL}`;
+        : `Early bird gets the Jon — today's message pool got used up by other interested visitors. It refills at midnight UTC, or skip the line entirely: ${EMAIL}`;
     return json({ error: decision.reason === "ip" ? "rate_limited" : "capped", message }, 429);
   }
 
@@ -132,12 +132,15 @@ export default async function handler(req: Request, context: Context) {
   const start = Date.now();
   let reply: string | null = null;
   let provider: Provider = "gemini";
+  let geminiRateLimited = false;
 
   if (process.env.GEMINI_API_KEY) {
     try {
       reply = await askGemini(SYSTEM_PROMPT, validated.messages);
     } catch (err) {
       console.error("gemini failed", err);
+      geminiRateLimited =
+        err instanceof Error && /^gemini: HTTP 429\b/.test(err.message);
       if (!shouldFallback(err)) {
         return json(
           { error: "upstream", message: `Relay hiccup on my end — email Jon directly: ${EMAIL}` },
@@ -156,6 +159,16 @@ export default async function handler(req: Request, context: Context) {
       Date.now() - start <= 6_000;
 
     if (!claudeAvailable) {
+      // Provider quota exhausted with no fallback relay: demand is the message.
+      if (geminiRateLimited) {
+        return json(
+          {
+            error: "capped",
+            message: `Early bird gets the Jon — enough people asked about him today that the token pool ran dry. It refills at midnight UTC, but the fastest movers already emailed: ${EMAIL}`,
+          },
+          429
+        );
+      }
       return json(
         { error: "upstream", message: `The relay is down — the human is more reliable: ${EMAIL}` },
         502
